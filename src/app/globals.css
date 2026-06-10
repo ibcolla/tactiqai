@@ -1,0 +1,243 @@
+/* src/app/globals.css — Week 3: responsive breakpoints + VAR styles added */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pitch-black: #0a0c0a;
+  --pitch-dark: #0f1410;
+  --pitch-mid: #161d16;
+  --pitch-line: #1e2a1e;
+  --pitch-faint: #253025;
+
+  --grass-bright: #00e554;
+  --grass-mid: #00c245;
+  --grass-dim: #009933;
+
+  --white-pure: #f5f7f5;
+  --white-dim: #c8d4c8;
+  --white-ghost: #6b7d6b;
+
+  --amber-signal: #ffb800;
+  --red-signal: #ff3a3a;
+  --blue-accent: #4fc3f7;
+  --var-purple: #a78bfa;
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--pitch-black);
+  color: var(--white-pure);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── Pitch grid background ──────────────────────────────────────────────── */
+.pitch-bg {
+  background-color: var(--pitch-black);
+  background-image:
+    linear-gradient(var(--pitch-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pitch-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Typography helpers ─────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); letter-spacing: 0.04em; }
+.font-mono    { font-family: var(--font-mono); }
+
+.glow-green-text { text-shadow: 0 0 20px rgba(0,229,84,0.4); }
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+.card-dark {
+  background: var(--pitch-dark);
+  border: 1px solid var(--pitch-line);
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card-active {
+  border-color: var(--grass-dim) !important;
+  box-shadow: 0 0 0 1px var(--grass-dim), 0 0 20px rgba(0,229,84,0.1);
+}
+
+/* ─── Minute badge ───────────────────────────────────────────────────────── */
+.minute-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--pitch-faint);
+  color: var(--grass-bright);
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* ─── Significance colours ───────────────────────────────────────────────── */
+.sig-critical { color: var(--grass-bright); }
+.sig-high     { color: var(--amber-signal); }
+.sig-medium   { color: var(--white-dim); }
+.sig-low      { color: var(--white-ghost); }
+
+.bg-sig-critical { background: rgba(0,229,84,0.08);   border-color: rgba(0,229,84,0.2); }
+.bg-sig-high     { background: rgba(255,184,0,0.08);  border-color: rgba(255,184,0,0.2); }
+.bg-sig-medium   { background: rgba(200,212,200,0.06); border-color: rgba(200,212,200,0.12); }
+.bg-sig-low      { background: transparent;            border-color: var(--pitch-line); }
+
+/* ─── VAR badge ──────────────────────────────────────────────────────────── */
+.var-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: rgba(167,139,250,0.12);
+  color: var(--var-purple);
+  border: 1px solid rgba(167,139,250,0.25);
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--pitch-dark); }
+::-webkit-scrollbar-thumb { background: var(--pitch-faint); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--white-ghost); }
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes varScan {
+  0%   { transform: translateY(0); opacity: 0.8; }
+  50%  { opacity: 0.4; }
+  100% { transform: translateY(6px); opacity: 0.8; }
+}
+
+.animate-fade-up    { animation: fadeUp 0.4s ease forwards; }
+.animate-pulse-green { animation: pulseGreen 1.5s ease-in-out infinite; }
+.animate-var-scan   { animation: varScan 1.8s ease-in-out infinite; }
+
+/* ─── Loading spinner ────────────────────────────────────────────────────── */
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--pitch-faint);
+  border-top-color: var(--grass-bright);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ─── RESPONSIVE LAYOUT ──────────────────────────────────────────────────── */
+
+/* Main two-column grid: side-by-side on desktop, stacked on mobile */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Match grid: two columns on desktop, one on mobile */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+/* Audience level row */
+.level-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Header flex */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Formation comparison: two pitches side by side on desktop */
+.formation-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Sticky panel */
+.sticky-panel {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+/* Hero title */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 6vw, 68px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Section label */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--white-ghost);
+  margin-bottom: 12px;
+}
+
+/* ─── Mobile overrides (≤ 768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .formation-compare-grid {
+    grid-template-columns: 1fr;
+  }
+  .sticky-panel {
+    position: static;
+    max-height: none;
+  }
+  .header-inner {
+    gap: 8px;
+  }
+  .header-ibm-label {
+    display: none; /* hide on very small screens */
+  }
+  .hero-title {
+    font-size: clamp(28px, 9vw, 48px);
+  }
+  .level-row button {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+/* ─── Tablet (769–1024px) ─────────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .formation-compare-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
