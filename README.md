@@ -156,6 +156,9 @@ GRANITE_MODEL_ID=ibm/granite-13b-chat-v2
 ```bash
 npm run dev
 # Open http://localhost:3000
+
+## Live Demo
+https://tactiqai-hazel.vercel.app/
 ```
 
 ### Build for Production
