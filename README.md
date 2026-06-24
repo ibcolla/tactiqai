@@ -38,6 +38,17 @@ Explanations adapt in real time to the user's experience level:
 
 ---
 
+
+## Screenshots
+
+### Match Selection
+
+### Tactical Explanation — IBM Granite Analysis
+
+### Formation Visualizer
+
+### VAR Decision Reconstruction
+
 ## Architecture
 
 ```
